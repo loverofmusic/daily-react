@@ -5,10 +5,11 @@ export default class TodoList extends Component {
     super(props);
     this.state = {
       inputValue: "",
-      list: ["555","fff"]
+      list: ["555", "fff"]
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleBtnClick = this.handleBtnClick.bind(this);
+    // this.handleItemDelete = this.handleItemDelete.bind(this);
   }
 
   render() {
@@ -17,11 +18,13 @@ export default class TodoList extends Component {
         <input value={this.state.inputValue} onChange={this.handleInputChange} />
         <button onClick={this.handleBtnClick}>提交</button>
         <ul>
-          {
-            this.state.list.map((item, index) => {
-              return <li key={index}>{item}</li>
-            })
-          }
+          {this.state.list.map((item, index) => {
+            return (
+              <li key={index} onClick={this.handleItemDelete.bind(this, index)}>
+                {item}
+              </li>
+            );
+          })}
         </ul>
       </Fragment>
     );
@@ -37,6 +40,16 @@ export default class TodoList extends Component {
   handleBtnClick() {
     this.setState({
       list: [...this.state.list, this.state.inputValue]
+    });
+  }
+
+  handleItemDelete(index) {
+    console.log(index);
+    //immutable => state 不允许我们做任何的改变
+    const list = [...this.state.list];
+    list.splice(index, 1);
+    this.setState({
+      list: list
     });
   }
 }
