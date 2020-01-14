@@ -5,18 +5,23 @@ export default class TodoList extends Component {
     super(props);
     this.state = {
       inputValue: "",
-      list: []
+      list: ["555","fff"]
     };
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleBtnClick = this.handleBtnClick.bind(this);
   }
 
   render() {
     return (
       <Fragment>
         <input value={this.state.inputValue} onChange={this.handleInputChange} />
-        <button onClick="">提交</button>
+        <button onClick={this.handleBtnClick}>提交</button>
         <ul>
-          <li>learn react</li>
+          {
+            this.state.list.map((item, index) => {
+              return <li key={index}>{item}</li>
+            })
+          }
         </ul>
       </Fragment>
     );
@@ -26,6 +31,12 @@ export default class TodoList extends Component {
     console.log(e.target.value);
     this.setState({
       inputValue: e.target.value
+    });
+  }
+
+  handleBtnClick() {
+    this.setState({
+      list: [...this.state.list, this.state.inputValue]
     });
   }
 }
