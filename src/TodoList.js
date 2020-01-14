@@ -15,8 +15,15 @@ export default class TodoList extends Component {
   render() {
     return (
       <Fragment>
-        <input value={this.state.inputValue} onChange={this.handleInputChange} />
-        <button onClick={this.handleBtnClick}>提交</button>
+        {/* 下面是一个input */}
+        {
+          // 单行注释这么写
+        }
+        <div>
+          <input value={this.state.inputValue} onChange={this.handleInputChange} />
+          <button onClick={this.handleBtnClick}>提交</button>
+        </div>
+
         <ul>
           {this.state.list.map((item, index) => {
             return (
