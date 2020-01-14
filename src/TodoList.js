@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import "./style.css"
 
 export default class TodoList extends Component {
   constructor(props) {
@@ -20,7 +21,7 @@ export default class TodoList extends Component {
           // 单行注释这么写
         }
         <div>
-          <input value={this.state.inputValue} onChange={this.handleInputChange} />
+          <input className="input" value={this.state.inputValue} onChange={this.handleInputChange} />
           <button onClick={this.handleBtnClick}>提交</button>
         </div>
 
