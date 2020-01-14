@@ -6,7 +6,7 @@ export default class TodoItem extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
   render() {
-    return <li onClick={this.handleClick.bind(this)}>{this.props.content}</li>;
+    return <li onClick={this.handleClick}>{this.props.content}</li>;
   }
 
   handleClick() {
