@@ -11,7 +11,7 @@ export default class TodoList extends Component {
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleBtnClick = this.handleBtnClick.bind(this);
-    // this.handleItemDelete = this.handleItemDelete.bind(this);
+    this.handleItemDelete = this.handleItemDelete.bind(this);
   }
 
   render() {
@@ -35,7 +35,7 @@ export default class TodoList extends Component {
         <ul>
           {this.state.list.map((item, index) => {
             return (
-              <Fragment>
+              <Fragment key={index}>
                 {/*
                   <li 
                     key={index} 
@@ -45,11 +45,7 @@ export default class TodoList extends Component {
                     {item}}
                   </li>
                 */}
-                <TodoItem
-                  content={item}
-                  index={index}
-                  deleteItem={this.handleItemDelete.bind(this)}
-                />
+                <TodoItem content={item} index={index} deleteItem={this.handleItemDelete} />
               </Fragment>
             );
           })}
@@ -59,25 +55,35 @@ export default class TodoList extends Component {
   }
 
   handleInputChange(e) {
-    console.log(e.target.value);
-    this.setState({
-      inputValue: e.target.value
-    });
+    // this.setState({
+    //   inputValue: e.target.value
+    // });
+    const value = e.target.value;
+    this.setState(() => ({
+      inputValue: value
+    }));
   }
 
   handleBtnClick() {
-    this.setState({
-      list: [...this.state.list, this.state.inputValue]
-    });
+    // this.setState({
+    //   list: [...this.state.list, this.state.inputValue]
+    // });
+    this.setState(prevState => ({
+      list: [...prevState.list, prevState.inputValue]
+    }));
   }
 
   handleItemDelete(index) {
-    console.log(index);
     //immutable => state 不允许我们做任何的改变
-    const list = [...this.state.list];
-    list.splice(index, 1);
-    this.setState({
-      list: list
+    // const list = [...this.state.list];
+    // list.splice(index, 1);
+    // this.setState({
+    //   list: list
+    // });
+    this.setState(prevState => {
+      const list = [...prevState.list];
+      list.splice(index, 1);
+      return { list };
     });
   }
 }
