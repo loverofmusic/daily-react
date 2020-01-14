@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
-import "./style.css"
+import TodoItem from "./TodoItem";
+import "./style.css";
 
 export default class TodoList extends Component {
   constructor(props) {
@@ -22,20 +23,34 @@ export default class TodoList extends Component {
         }
         <div>
           <label htmlFor="insertArea">输入内容</label>
-          <input id="insertArea" className="input" value={this.state.inputValue} onChange={this.handleInputChange} />
+          <input
+            id="insertArea"
+            className="input"
+            value={this.state.inputValue}
+            onChange={this.handleInputChange}
+          />
           <button onClick={this.handleBtnClick}>提交</button>
         </div>
 
         <ul>
           {this.state.list.map((item, index) => {
             return (
-              <li 
-                key={index} 
-                onClick={this.handleItemDelete.bind(this, index)}
-                dangerouslySetInnerHTML={{__html: item}}
-              >
-                {/* {item} */}
-              </li>
+              <Fragment>
+                {/*
+                  <li 
+                    key={index} 
+                    onClick={this.handleItemDelete.bind(this, index)}
+                    dangerouslySetInnerHTML={{__html: item}}
+                    >
+                    {item}}
+                  </li>
+                */}
+                <TodoItem
+                  content={item}
+                  index={index}
+                  deleteItem={this.handleItemDelete.bind(this)}
+                />
+              </Fragment>
             );
           })}
         </ul>
